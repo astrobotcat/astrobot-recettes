@@ -1,11 +1,11 @@
 # 📊 Dashboard Vercel - Projet astrobot-recettes
 
-*Dernière mise à jour : 2026-04-19 12:56:44*
+*Dernière mise à jour : 2026-04-19 13:49:33*
 
 | ID Déploiement | Statut | URL | Date |
 |---------------|--------|-----|------|
-| dpl_8bVLCLHJSmLKYi7rGS1VvuoX4tRg | READY | [Lien](astrobot-recettes-59qbvv23u-astrobotcat.vercel.app) | 2026-04-19 10:50:04 |
-| dpl_2bPqmBg2dhEraNK43d7mDA4jGpvC | READY | [Lien](astrobot-recettes-muua2xv3n-astrobotcat.vercel.app) | 2026-04-19 10:48:20 |
-| dpl_D1XpTbN6vmBEk6e2bDMfatJ3zQTF | READY | [Lien](astrobot-recettes-2wojfm45o-astrobotcat.vercel.app) | 2026-04-19 10:44:51 |
-| dpl_GUchWtr95SJud2r2T5XLaFy3oQuo | READY | [Lien](astrobot-recettes-c5noasrow-astrobotcat.vercel.app) | 2026-04-19 10:40:57 |
-| dpl_H96Ph4nEpVfBkecVqyNfmtJHACM7 | READY | [Lien](astrobot-recettes-k43slecgr-astrobotcat.vercel.app) | 2026-04-19 10:23:22 |
+| dpl_34DF4ut9QtM5GdfyYj1QQCYCWh4t | READY | [Lien](astrobot-recettes-2rfnq51jn-astrobotcat.vercel.app) | 2026-04-19 11:47:22 |
+| dpl_GoTDmpRvPm6JCV9fUYwvNYcHZ8ib | READY | [Lien](astrobot-recettes-aa21c2gm9-astrobotcat.vercel.app) | 2026-04-19 11:10:33 |
+| dpl_8tbZJb6Tt8PLd9TazhUFecc3ezM1 | READY | [Lien](astrobot-recettes-feorqumrm-astrobotcat.vercel.app) | 2026-04-19 11:09:56 |
+| dpl_9o5XMfRbMPbE8ThYaBvFYqr8Zt49 | READY | [Lien](astrobot-recettes-q1jd3tfn4-astrobotcat.vercel.app) | 2026-04-19 11:09:22 |
+| dpl_Ampcd3MddNHXbB4XEstDguL6hHyQ | READY | [Lien](astrobot-recettes-muhr5er3x-astrobotcat.vercel.app) | 2026-04-19 11:00:07 |
