@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }} - 🍳 Mes Recettes Perso</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        h1 {
+            color: #ff6b6b;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
+        }
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">← Retour à la liste</a>
+    <h1>{{ title }}</h1>
+    <div>{{ content|safe }}</div>
+</body>
+</html>

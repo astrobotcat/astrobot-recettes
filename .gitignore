@@ -1,0 +1,12 @@
+# Environnement virtuel
+venv/
+
+# Fichiers Python
+__pycache__/
+*.py[cod]
+
+# Fichiers système
+.DS_Store
+
+# Logs
+*.log
