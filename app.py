@@ -29,20 +29,34 @@ def home():
 
 @app.route("/pdf/<filename>.pdf")
 def download_pdf(filename):
-    import subprocess
-    from flask import send_from_directory
+    import requests
+    from flask import send_file, abort
+    import io
     
-    # Chemin vers le script de génération PDF
-    pdf_script = "/home/vinz/.openclaw/workspace/astrobot-recettes/generate_pdf.sh"
-    pdf_dir = "/home/vinz/.openclaw/workspace/astrobot-recettes/static/pdfs"
-    pdf_path = os.path.join(pdf_dir, f"{filename}.pdf")
+    # Clé API PDFShift (à remplacer par ta clé)
+    PDFSHIFT_API_KEY = "sk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"  # Remplace par ta clé PDFShift
     
-    # Générer le PDF si nécessaire
-    if not os.path.exists(pdf_path):
-        recipe_url = f"https://astrobot-recettes.vercel.app/recipe/{filename.replace('_', '%20')}.md"
-        subprocess.run([pdf_script, recipe_url, pdf_path], check=True)
+    # URL de la recette
+    recipe_url = f"https://astrobot-recettes.vercel.app/recipe/{filename.replace('_', '%20')}.md"
     
-    return send_from_directory(pdf_dir, f"{filename}.pdf", as_attachment=True)
+    # Appel à l'API PDFShift
+    response = requests.post(
+        "https://api.pdfshift.io/v3/convert/pdf",
+        auth=("api", PDFSHIFT_API_KEY),
+        json={"source": recipe_url},
+        stream=True
+    )
+    
+    if response.status_code != 200:
+        abort(500, description="Erreur lors de la génération du PDF")
+    
+    # Retourner le PDF en streaming
+    return send_file(
+        io.BytesIO(response.content),
+        mimetype="application/pdf",
+        as_attachment=True,
+        download_name=f"{filename}.pdf"
+    )
 
 
 @app.route("/recipe/<filename>")
