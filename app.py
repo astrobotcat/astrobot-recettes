@@ -18,8 +18,10 @@ def home():
             with open(os.path.join(RECIPES_DIR, filename), "r", encoding="utf-8") as f:
                 content = f.read()
                 html = markdown.markdown(content)
+                # Remplacer les underscores par des espaces pour l'affichage
+                title = filename.replace(".md", "").replace("_", " ")
                 recipes.append({
-                    "title": filename.replace(".md", ""),
+                    "title": title,
                     "html": html,
                     "filename": filename
                 })
@@ -27,10 +29,12 @@ def home():
 
 @app.route("/recipe/<filename>")
 def recipe(filename):
+    # Remplacer les underscores par des espaces pour l'affichage
+    title = filename.replace(".md", "").replace("_", " ")
     with open(os.path.join(RECIPES_DIR, filename), "r", encoding="utf-8") as f:
         content = f.read()
         html = markdown.markdown(content)
-    return render_template("recipe.html", content=html, title=filename.replace(".md", ""))
+    return render_template("recipe.html", content=html, title=title)
 
 if __name__ == "__main__":
     app.run(debug=True)
