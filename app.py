@@ -27,6 +27,24 @@ def home():
                 })
     return render_template("index.html", recipes=recipes)
 
+@app.route("/pdf/<filename>.pdf")
+def download_pdf(filename):
+    import subprocess
+    from flask import send_from_directory
+    
+    # Chemin vers le script de génération PDF
+    pdf_script = "/home/vinz/.openclaw/workspace/astrobot-recettes/generate_pdf.sh"
+    pdf_dir = "/home/vinz/.openclaw/workspace/astrobot-recettes/static/pdfs"
+    pdf_path = os.path.join(pdf_dir, f"{filename}.pdf")
+    
+    # Générer le PDF si nécessaire
+    if not os.path.exists(pdf_path):
+        recipe_url = f"https://astrobot-recettes.vercel.app/recipe/{filename.replace('_', '%20')}.md"
+        subprocess.run([pdf_script, recipe_url, pdf_path], check=True)
+    
+    return send_from_directory(pdf_dir, f"{filename}.pdf", as_attachment=True)
+
+
 @app.route("/recipe/<filename>")
 def recipe(filename):
     # Remplacer les underscores par des espaces pour l'affichage
