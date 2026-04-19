@@ -1,0 +1,13 @@
+{
+  "name": "astrobot-recettes-pdf",
+  "version": "1.0.0",
+  "description": "Génération de PDF pour les recettes",
+  "main": "generate_pdf.js",
+  "scripts": {
+    "install": "npm install puppeteer",
+    "generate": "node generate_pdf.js"
+  },
+  "dependencies": {
+    "puppeteer": "^21.6.0"
+  }
+}
