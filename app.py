@@ -27,38 +27,6 @@ def home():
                 })
     return render_template("index.html", recipes=recipes)
 
-@app.route("/pdf/<filename>.pdf")
-def download_pdf(filename):
-    import requests
-    from flask import send_file, abort
-    import io
-    
-    # Clé API PDFShift (à remplacer par ta clé)
-    PDFSHIFT_API_KEY = "sk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"  # Remplace par ta clé PDFShift
-    
-    # URL de la recette
-    recipe_url = f"https://astrobot-recettes.vercel.app/recipe/{filename.replace('_', '%20')}.md"
-    
-    # Appel à l'API PDFShift
-    response = requests.post(
-        "https://api.pdfshift.io/v3/convert/pdf",
-        auth=("api", PDFSHIFT_API_KEY),
-        json={"source": recipe_url},
-        stream=True
-    )
-    
-    if response.status_code != 200:
-        abort(500, description="Erreur lors de la génération du PDF")
-    
-    # Retourner le PDF en streaming
-    return send_file(
-        io.BytesIO(response.content),
-        mimetype="application/pdf",
-        as_attachment=True,
-        download_name=f"{filename}.pdf"
-    )
-
-
 @app.route("/recipe/<filename>")
 def recipe(filename):
     # Remplacer les underscores par des espaces pour l'affichage
