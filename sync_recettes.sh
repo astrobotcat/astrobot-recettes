@@ -19,12 +19,20 @@ send_telegram_notification() {
     message action="send" channel="$TELEGRAM_CHANNEL" target="$TELEGRAM_TARGET" message="$message" > /dev/null 2>&1
 }
 
-# Override du message de commit si fourni
+# Override du message de commit ou mode dry-run
+DRY_RUN=false
 if [ "$1" == "--commit-message" ] && [ -n "$2" ]; then
     COMMIT_MESSAGE="$2"
+    shift 2
 fi
 
-# Fonction de log
+if [ "$1" == "--dry-run" ]; then
+    DRY_RUN=true
+    echo "[$(date '+%Y-%m-%d %H:%M:%S')] 🚨 Mode DRY-RUN activé : aucune modification ne sera appliquée." >> "$LOG_FILE"
+    shift
+fi
+
+# Fonction de log (déplacée en haut pour être accessible partout)
 log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
 }
@@ -39,10 +47,17 @@ handle_error() {
 
 # Synchronisation avec rsync
 log "Début de la synchronisation depuis $SOURCE_DIR vers $REPO_DIR"
-rsync -av --progress --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' "$SOURCE_DIR" "$REPO_DIR" >> "$LOG_FILE" 2>&1
-RSYNC_EXIT_CODE=$?
-if [ $RSYNC_EXIT_CODE -ne 0 ]; then
-    handle_error "Échec de la synchronisation rsync (code $RSYNC_EXIT_CODE)"
+if [ "$DRY_RUN" = true ]; then
+    log "🔍 DRY-RUN: rsync -av --dry-run --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' \"$SOURCE_DIR\" \"$REPO_DIR\""
+    rsync -av --dry-run --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' "$SOURCE_DIR" "$REPO_DIR" >> "$LOG_FILE" 2>&1
+    RSYNC_EXIT_CODE=$?
+    log "🚨 DRY-RUN: rsync terminé avec le code $RSYNC_EXIT_CODE (0 = succès, 23 = fichiers manquants)."
+else
+    rsync -av --progress --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' "$SOURCE_DIR" "$REPO_DIR" >> "$LOG_FILE" 2>&1
+    RSYNC_EXIT_CODE=$?
+    if [ $RSYNC_EXIT_CODE -ne 0 ]; then
+        handle_error "Échec de la synchronisation rsync (code $RSYNC_EXIT_CODE)"
+    fi
 fi
 
 # Vérification des différences
@@ -51,6 +66,15 @@ CHANGES=$(git status --porcelain)
 
 if [ -z "$CHANGES" ]; then
     log "Aucun changement détecté. Fin du script."
+    exit 0
+fi
+
+if [ "$DRY_RUN" = true ]; then
+    log "🔍 DRY-RUN: Changements détectés (non appliqués) :"
+    echo "$CHANGES" | while read -r line; do
+        log "  $line"
+    done
+    log "🚨 DRY-RUN: Fin du script sans modifications."
     exit 0
 fi
 

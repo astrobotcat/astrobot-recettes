@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });Object.defineProperty(exports, "isDiagnosticFlagEnabled", { enumerable: true, get: function () {return _diagnosticFlags9FQum4u.t;} });Object.defineProperty(exports, "isDiagnosticsEnabled", { enumerable: true, get: function () {return _diagnosticEventsP3w1ZgD_.n;} });var _diagnosticEventsP3w1ZgD_ = require("../diagnostic-events-P3w1ZgD_.js");
+var _diagnosticFlags9FQum4u = require("../diagnostic-flags--9FQum4u.js"); /* v9-a55c219c453cc965 */

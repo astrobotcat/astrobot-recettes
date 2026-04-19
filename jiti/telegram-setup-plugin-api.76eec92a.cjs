@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });Object.defineProperty(exports, "telegramSetupPlugin", { enumerable: true, get: function () {return _channelSetupBei3ZTCY.t;} });var _channelSetupBei3ZTCY = require("./channel.setup-Bei3ZTCY.js"); /* v9-34ee5c44dd81dd38 */

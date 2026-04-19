@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });Object.defineProperty(exports, "DEFAULT_ACCOUNT_ID", { enumerable: true, get: function () {return _accountIdJ7GeQlaZ.t;} });Object.defineProperty(exports, "normalizeAccountId", { enumerable: true, get: function () {return _accountIdJ7GeQlaZ.n;} });Object.defineProperty(exports, "normalizeOptionalAccountId", { enumerable: true, get: function () {return _accountIdJ7GeQlaZ.r;} });var _accountIdJ7GeQlaZ = require("../account-id-j7GeQlaZ.js");
+require("../account-id-iAd-YVZa.js"); /* v9-368e18961c9badad */

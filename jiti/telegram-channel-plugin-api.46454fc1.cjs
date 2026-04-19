@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });Object.defineProperty(exports, "telegramPlugin", { enumerable: true, get: function () {return _channelDe1dz7WA.t;} });Object.defineProperty(exports, "telegramSetupPlugin", { enumerable: true, get: function () {return _channelSetupBei3ZTCY.t;} });var _channelDe1dz7WA = require("./channel-De1dz7WA.js");
+var _channelSetupBei3ZTCY = require("./channel.setup-Bei3ZTCY.js"); /* v9-8367b334f1f76d96 */

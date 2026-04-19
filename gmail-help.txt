@@ -1,0 +1,88 @@
+Usage: gog gmail (mail,email) <command> [flags]
+Build: v0.12.0 (c18c58c)
+
+Gmail
+
+Flags:
+  -h, --help                   Show context-sensitive help.
+      --color="auto"           Color output: auto|always|never
+  -a, --account=STRING         Account email for API commands
+                               (gmail/calendar/chat/classroom/drive/docs/slides/contacts/tasks/people/sheets/forms/appscript)
+      --client=""              OAuth client name (selects stored credentials +
+                               token bucket)
+      --access-token=STRING    Use provided access token directly (bypasses
+                               stored refresh tokens; token expires in ~1h)
+                               ($GOG_ACCESS_TOKEN)
+      --enable-commands=""     Comma-separated list of enabled top-level
+                               commands (restricts CLI)
+  -j, --json                   Output JSON to stdout (best for scripting)
+  -p, --plain                  Output stable, parseable text to stdout (TSV;
+                               no colors)
+      --results-only           In JSON mode, emit only the primary result (drops
+                               envelope fields like nextPageToken)
+      --select=STRING          In JSON mode, select comma-separated fields
+                               (best-effort; supports dot paths). Desire path:
+                               use --fields for most commands.
+  -n, --dry-run                Do not make changes; print intended actions and
+                               exit successfully
+  -y, --force                  Skip confirmations for destructive commands
+      --no-input               Never prompt; fail instead (useful for CI)
+  -v, --verbose                Enable verbose logging
+      --version                Print version and exit
+
+Commands:
+
+Read
+  search (find,query,ls,list) <query> ... [flags]
+    Search threads using Gmail query syntax
+
+  messages (message,msg,msgs) <command>
+    Message operations
+
+  get (info,show) <messageId> [flags]
+    Get a message (full|metadata|raw)
+
+  attachment <messageId> <attachmentId> [flags]
+    Download a single attachment
+
+  url <threadId> ...
+    Print Gmail web URLs for threads
+
+  history [flags]
+    Gmail history
+
+Organize
+  thread (threads,read) <command>
+    Thread operations (get, modify)
+
+  labels (label) <command>
+    Label operations
+
+  batch <command>
+    Batch operations
+
+  archive [<messageId> ...] [flags]
+    Archive messages (remove from inbox)
+
+  mark-read (read-messages) [<messageId> ...] [flags]
+    Mark messages as read
+
+  unread (mark-unread) [<messageId> ...] [flags]
+    Mark messages as unread
+
+  trash [<messageId> ...] [flags]
+    Move messages to trash
+
+Write
+  send [flags]
+    Send an email
+
+  track <command>
+    Email open tracking
+
+  drafts (draft) <command>
+    Draft operations
+
+Admin
+  settings <command>
+    Settings and admin

@@ -1,0 +1,17 @@
+Bonjour VinZ,
+
+Voici les 3 infos tech du jour :
+
+1. **OpenClaw v2.1 est sorti !**
+   - Nouvelle intégration avec Obsidian.
+   - [Lien vers la release](https://openclaw.ai/blog/v2.1)
+
+2. **GitHub Copilot X disponible en beta**
+   - Intègre des agents IA pour coder.
+   - [Lien vers l’annonce](https://github.blog/copilot-x)
+
+3. **Nouveau framework : AgentFlow**
+   - Pour orchestrer les agents IA comme OpenClaw.
+   - [Lien vers le repo](https://github.com/agentflow/agentflow)
+
+Bonne lecture !

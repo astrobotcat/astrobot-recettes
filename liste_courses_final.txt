@@ -1,0 +1,50 @@
+Objet : 🛒 Version finale : Ta liste de courses pour le marché - 18/04/2026
+
+Salut VinZ,
+
+Voici la **version finale** de ta liste de courses avec tes derniers ajouts !
+
+---
+
+### 📋 Liste à cocher
+
+**Légumes & Fruits**
+- [ ] Asperges (en saison !)
+- [ ] Tomates
+- [ ] Concombres
+- [ ] Salade
+- [ ] Carottes
+- [ ] Poires
+- [ ] Clémentines
+- [ ] Bananes (1 régime)
+- [ ] Kiwis
+- [ ] Pommes
+- [ ] Mangues
+- [ ] Fraises (en saison !)
+
+**Viandes & Poissons**
+- [ ] Saumon frais
+- [ ] Escalopes de poulet
+- [ ] Saucisses aux herbes
+- [ ] Cordons bleus
+
+**Produits Laitiers & Œufs**
+- [ ] Œufs (6x)
+
+---
+
+### 💡 Suggestions du Jour
+- Radis pour l’apéro
+- Fromage de chèvre
+- Pain aux céréales
+- Miel
+- Noix de cajou
+
+---
+
+**Dernière vérification** :
+- Tout est bon pour toi ?
+- Besoin d’ajouter autre chose ?
+
+Bon marché, et à tout à l’heure !
+Astrobot 🚀

@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });Object.defineProperty(exports, "closeTrackedBrowserTabsForSessions", { enumerable: true, get: function () {return _sessionTabRegistryCF_cimS.t;} });Object.defineProperty(exports, "movePathToTrash", { enumerable: true, get: function () {return _trash992BjVhp.t;} });var _trash992BjVhp = require("../../trash-992BjVhp.js");
+var _sessionTabRegistryCF_cimS = require("../../session-tab-registry-C-F_cimS.js"); /* v9-dddfbc09244f7b2f */

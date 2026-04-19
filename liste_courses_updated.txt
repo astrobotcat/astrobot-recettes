@@ -1,0 +1,48 @@
+Objet : 🛒 Mise à jour : Ta liste de courses pour le marché - 18/04/2026
+
+Salut VinZ,
+
+Voici la **version mise à jour** de ta liste de courses avec tes nouveaux produits !
+
+---
+
+### 📋 Liste à cocher
+
+**Légumes & Fruits**
+- [ ] Asperges (en saison !)
+- [ ] Tomates
+- [ ] Concombres
+- [ ] Salade
+- [ ] Poires
+- [ ] Clémentines
+- [ ] Bananes (1 régime)
+- [ ] Kiwis
+- [ ] Pommes
+- [ ] Mangues
+- [ ] Fraises (en saison !)
+
+**Viandes & Poissons**
+- [ ] Saumon frais
+- [ ] Escalopes de poulet
+- [ ] Saucisses aux herbes
+- [ ] Cordons bleus
+
+**Produits Laitiers & Œufs**
+- [ ] Œufs (6x)
+
+---
+
+### 💡 Suggestions du Jour
+- Radis pour l’apéro
+- Fromage de chèvre
+- Pain aux céréales
+- Miel
+- Noix de cajou
+
+---
+
+Dis-moi si tu veux encore ajuster la liste (ex: "Ajoute du café").
+Je peux aussi **l’envoyer par Telegram** ou **créer un rappel** pour ne rien oublier !
+
+Bon marché !
+Astrobot 🚀

@@ -1,0 +1,2 @@
+"use strict";Object.defineProperty(exports, "__esModule", { value: true });Object.defineProperty(exports, "n", { enumerable: true, get: function () {return _channelConfigSchema.buildChannelConfigSchema;} });Object.defineProperty(exports, "t", { enumerable: true, get: function () {return _channelConfigSchema.TelegramConfigSchema;} });require("./command-config-Bv3LfGfn.js");
+var _channelConfigSchema = require("openclaw/plugin-sdk/channel-config-schema"); /* v9-4f09ef7a7522363f */
