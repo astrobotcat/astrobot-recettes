@@ -36,15 +36,38 @@ tail -f /home/vinz/.openclaw/workspace/astrobot-recettes/sync.log
 
 ## 🔹 Déploiement Vercel
 - Le déploiement est **automatiquement déclenché** après un push vers GitHub.
-- Pour vérifier le statut du déploiement, utiliser l'API Vercel (non implémenté dans le script pour l'instant).
+- **Vérification automatique** : Le script vérifie le statut du déploiement via l'API Vercel après chaque push.
+  - Si le déploiement échoue (`status != "READY"`), un **rollback automatique** est effectué.
+  - Un message Telegram est envoyé pour notifier l'échec et le rollback.
+
+### 📌 Vérification manuelle du déploiement
+```bash
+curl -s "https://api.vercel.com/v6/deployments?projectId=astrobot-recettes&limit=1" \
+  -H "Authorization: Bearer $(cat ~/.openclaw/vercel_token)" | jq -r '.deployments[0].readyState'
+```
+
+## 🔹 Notifications Telegram
+- **En cas d'échec** : Un message est envoyé à VinZ (@vinzelnino) avec l'erreur et un lien vers `sync.log`.
+- **En cas de succès** : Un message confirme la synchro et le déploiement Vercel.
+
+### 📌 Exemples de messages
+- **Succès** : `✅ Synchro Git et déploiement Vercel réussis pour le commit: [message]`
+- **Échec** : `❌ Synchro Git échouée : [erreur]. Voir sync.log pour détails.`
+
+## 🔹 Rollback Automatique
+- Si le déploiement Vercel échoue, le script **annule le dernier commit** et force le push.
+- Un message Telegram est envoyé pour confirmer le rollback.
+
+### 📌 Commandes utilisées
+```bash
+git reset --hard HEAD~1
+git push --force origin main
+```
 
 ## 🔹 Fichiers Exclus
 Les dossiers suivants sont **ignorés** lors de la synchronisation :
 - `venv/`
 - `__pycache__/`
 - `.git/`
-
-## 🔹 Améliorations Possibles
-- Ajouter une vérification du statut du déploiement Vercel via l'API.
-- Notifier l'utilisateur (ex: Telegram) en cas d'échec de synchronisation.
-- Ajouter un système de rollback en cas d'erreur.
+- `.env`
+- `*.pyc`
