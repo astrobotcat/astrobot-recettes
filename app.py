@@ -7,8 +7,8 @@ import os
 
 app = Flask(__name__)
 
-# Chemin vers le dossier "recettes" dans le repo
-RECIPES_DIR = os.path.join(os.path.dirname(__file__), "recettes")
+# Chemin vers le dossier "recettes" (relatif à la racine du projet)
+RECIPES_DIR = "./recettes"
 
 @app.route("/")
 def home():
