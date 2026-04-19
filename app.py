@@ -7,8 +7,8 @@ import os
 
 app = Flask(__name__)
 
-# Chemin vers ton dossier de recettes Obsidian
-RECIPES_DIR = "/mnt/c/Users/VinZ/Documents/Astrobot/Astrobot/02_Personnel/🍳 Recettes de Cuisine"
+# Chemin vers le dossier "recettes" dans le repo
+RECIPES_DIR = os.path.join(os.path.dirname(__file__), "recettes")
 
 @app.route("/")
 def home():
