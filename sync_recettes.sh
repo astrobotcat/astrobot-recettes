@@ -8,6 +8,16 @@ SOURCE_DIR="/home/vinz/projets/recettes-site/"
 REPO_DIR="/home/vinz/.openclaw/workspace/astrobot-recettes/"
 LOG_FILE="/home/vinz/.openclaw/workspace/astrobot-recettes/sync.log"
 COMMIT_MESSAGE="Auto-sync: Mise à jour des recettes et fichiers associés"
+TELEGRAM_CHANNEL="telegram"
+TELEGRAM_TARGET="1591095126"  # ID Telegram de VinZ (@vinzelnino)
+VERCEL_TOKEN="$(cat ~/.openclaw/vercel_token)"
+PROJECT_ID="astrobot-recettes"  # ID du projet Vercel
+
+# Fonction de notification Telegram
+send_telegram_notification() {
+    local message="$1"
+    message action="send" channel="$TELEGRAM_CHANNEL" target="$TELEGRAM_TARGET" message="$message" > /dev/null 2>&1
+}
 
 # Override du message de commit si fourni
 if [ "$1" == "--commit-message" ] && [ -n "$2" ]; then
@@ -19,9 +29,17 @@ log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" >> "$LOG_FILE"
 }
 
+# Fonction pour gérer les erreurs
+handle_error() {
+    local error_message="$1"
+    log "❌ ERREUR: $error_message"
+    send_telegram_notification "❌ Synchro Git échouée : $error_message. Voir sync.log pour détails."
+    exit 1
+}
+
 # Synchronisation avec rsync
 log "Début de la synchronisation depuis $SOURCE_DIR vers $REPO_DIR"
-rsync -av --progress --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' "$SOURCE_DIR" "$REPO_DIR" >> "$LOG_FILE" 2>&1
+rsync -av --progress --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' "$SOURCE_DIR" "$REPO_DIR" >> "$LOG_FILE" 2>&1 || handle_error "Échec de la synchronisation rsync"
 
 # Vérification des différences
 cd "$REPO_DIR" || exit 1
@@ -34,23 +52,47 @@ fi
 
 # Ajout des fichiers et commit
 log "Changements détectés. Commit en cours..."
-git add . >> "$LOG_FILE" 2>&1
-git commit -m "$COMMIT_MESSAGE" >> "$LOG_FILE" 2>&1
+git add . >> "$LOG_FILE" 2>&1 || handle_error "Échec de git add"
+git commit -m "$COMMIT_MESSAGE" >> "$LOG_FILE" 2>&1 || handle_error "Échec de git commit"
 
 # Push vers GitHub
 log "Push vers GitHub..."
-git push origin main >> "$LOG_FILE" 2>&1
+git push origin main >> "$LOG_FILE" 2>&1 || handle_error "Échec de git push"
 
 # Vérification du déploiement Vercel
 log "Vérification du déploiement Vercel..."
 
-# Récupération du token Vercel
-VERCEL_TOKEN=$(cat ~/.openclaw/vercel_token)
-PROJECT_ID="astrobot-recettes"  # Remplacer par l'ID du projet Vercel si différent
+# Fonction pour vérifier le statut du déploiement Vercel
+check_vercel_deployment() {
+    local response
+    response=$(curl -s -X GET "https://api.vercel.com/v6/deployments?projectId=$PROJECT_ID&limit=1" \
+        -H "Authorization: Bearer $VERCEL_TOKEN" \
+        -H "Content-Type: application/json")
+    
+    if [ -z "$response" ]; then
+        handle_error "Impossible de récupérer le statut du déploiement Vercel"
+    fi
+    
+    local status
+    status=$(echo "$response" | jq -r '.deployments[0].readyState')
+    
+    if [ "$status" != "READY" ]; then
+        log "❌ Déploiement Vercel échoué avec le statut: $status"
+        send_telegram_notification "❌ Déploiement Vercel échoué pour le commit $COMMIT_MESSAGE. Statut: $status. Rollback en cours..."
+        
+        # Rollback du dernier commit
+        git reset --hard HEAD~1 >> "$LOG_FILE" 2>&1 || handle_error "Échec du rollback git"
+        git push --force origin main >> "$LOG_FILE" 2>&1 || handle_error "Échec du push après rollback"
+        
+        send_telegram_notification "✅ Rollback effectué avec succès. Le dernier commit a été annulé."
+        exit 1
+    else
+        log "✅ Déploiement Vercel réussi avec le statut: $status"
+        send_telegram_notification "✅ Synchro Git et déploiement Vercel réussis pour le commit: $COMMIT_MESSAGE"
+    fi
+}
 
-# Appel à l'API Vercel pour vérifier le dernier déploiement (optionnel)
-# curl -X GET "https://api.vercel.com/v6/deployments?projectId=$PROJECT_ID" \
-#     -H "Authorization: Bearer $VERCEL_TOKEN" \
-#     -H "Content-Type: application/json" >> "$LOG_FILE" 2>&1
+# Vérification du déploiement Vercel
+check_vercel_deployment
 
 log "Synchronisation terminée avec succès !"
