@@ -39,7 +39,11 @@ handle_error() {
 
 # Synchronisation avec rsync
 log "Début de la synchronisation depuis $SOURCE_DIR vers $REPO_DIR"
-rsync -av --progress --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' "$SOURCE_DIR" "$REPO_DIR" >> "$LOG_FILE" 2>&1 || handle_error "Échec de la synchronisation rsync"
+rsync -av --progress --exclude='venv/' --exclude='__pycache__/' --exclude='.git/' "$SOURCE_DIR" "$REPO_DIR" >> "$LOG_FILE" 2>&1
+RSYNC_EXIT_CODE=$?
+if [ $RSYNC_EXIT_CODE -ne 0 ]; then
+    handle_error "Échec de la synchronisation rsync (code $RSYNC_EXIT_CODE)"
+fi
 
 # Vérification des différences
 cd "$REPO_DIR" || exit 1
