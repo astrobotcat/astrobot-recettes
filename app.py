@@ -38,4 +38,3 @@ def recipe(filename):
 
 if __name__ == "__main__":
     app.run(debug=True)
-# Force rebuild Vercel - 1776604357
