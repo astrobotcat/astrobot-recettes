@@ -2,54 +2,19 @@
 <html>
 <head>
     <title>🍳 Mes Recettes Perso</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-        h1 {
-            color: #ff6b6b;
-            text-align: center;
-        }
-        .recipe-card {
-            border: 1px solid #ddd;
-            padding: 15px;
-            margin: 10px 0;
-            border-radius: 5px;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .recipe-card h2 {
-            margin-top: 0;
-            color: #ff6b6b;
-        }
-        a {
-            text-decoration: none;
-            color: #ff6b6b;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .search-box {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+    <button class="toggle-dark-mode" onclick="toggleDarkMode()">🌓 Activer le thème sombre</button>
+    
     <h1>🍳 Mes Recettes Perso</h1>
+    
     <input type="text" id="search" class="search-box" placeholder="Rechercher une recette..." onkeyup="searchRecipes()">
+    <input type="text" id="ingredient-search" class="search-box" placeholder="Rechercher par ingrédient (ex: tomate, pâtes)..." onkeyup="searchByIngredient()">
+    
     <div id="recipes-list">
         {% for recipe in recipes %}
-        <div class="recipe-card">
+        <div class="recipe-card" data-ingredients="{{ recipe.ingredients|join(',') }}">
             <h2><a href="/recipe/{{ recipe.filename }}">{{ recipe.title }}</a></h2>
             <div>{{ recipe.html|safe }}</div>
         </div>
@@ -57,6 +22,10 @@
     </div>
 
     <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+        }
+        
         function searchRecipes() {
             const input = document.getElementById("search");
             const filter = input.value.toLowerCase();
@@ -65,6 +34,21 @@
             for (let i = 0; i < cards.length; i++) {
                 const title = cards[i].getElementsByTagName("h2")[0].textContent.toLowerCase();
                 if (title.includes(filter)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+        
+        function searchByIngredient() {
+            const input = document.getElementById("ingredient-search");
+            const filter = input.value.toLowerCase();
+            const cards = document.getElementsByClassName("recipe-card");
+            
+            for (let i = 0; i < cards.length; i++) {
+                const ingredients = cards[i].dataset.ingredients.toLowerCase();
+                if (ingredients.includes(filter)) {
                     cards[i].style.display = "";
                 } else {
                     cards[i].style.display = "none";
