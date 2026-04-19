@@ -2,6 +2,8 @@
 
 **Pour 2 personnes**
 
+![Riz Cantonais](static/images/riz_cantonais.jpg)
+
 ---
 
 ## 📝 Ingrédients

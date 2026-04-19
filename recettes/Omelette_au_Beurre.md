@@ -2,6 +2,8 @@
 
 **Pour 1 personne**
 
+![Omelette au Beurre](static/images/omelette.jpg)
+
 ---
 
 ## 📝 Ingrédients

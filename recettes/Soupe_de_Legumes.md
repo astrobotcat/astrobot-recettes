@@ -2,6 +2,8 @@
 
 **Pour 4 personnes**
 
+![Soupe de Légumes](static/images/soupe_legumes.jpg)
+
 ---
 
 ## 📝 Ingrédients

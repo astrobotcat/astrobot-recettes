@@ -2,6 +2,8 @@
 
 **Pour 2 personnes**
 
+![Salade de Pâtes](static/images/salade_pates.jpg)
+
 ---
 
 ## 📝 Ingrédients

@@ -2,6 +2,8 @@
 
 **Pour 4 personnes**
 
+![Churros](static/images/churros.jpg)
+
 ---
 
 ## 📝 Ingrédients

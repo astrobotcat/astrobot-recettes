@@ -2,6 +2,8 @@
 
 **Pour 2 personnes**
 
+![Pâtes Aglio e Olio](static/images/pates_aglio_olio.jpg)
+
 ---
 
 ## 📝 Ingrédients
