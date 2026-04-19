@@ -8,6 +8,6 @@
     "generate": "node generate_pdf.js"
   },
   "dependencies": {
-    "puppeteer": "^21.6.0"
+    "puppeteer": "^21.11.0"
   }
 }

@@ -1,18 +1,13 @@
-// Script pour générer des PDF à partir des pages de recettes
-// Usage: node generate_pdf.js <url> <output_path>
+// Script pour générer un PDF à partir d'une recette
+// URL et chemin de sortie codés en dur pour éviter les arguments
 
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
 
 (async () => {
-    const url = process.argv[2];
-    const outputPath = process.argv[3];
-    
-    if (!url || !outputPath) {
-        console.error('Usage: node generate_pdf.js <url> <output_path>');
-        process.exit(1);
-    }
+    const url = "https://astrobot-recettes.vercel.app/recipe/Pates_Aglio_e_Olio.md";
+    const outputPath = "/home/vinz/.openclaw/workspace/astrobot-recettes/static/pdfs/Pates_Aglio_e_Olio.pdf";
     
     // Créer le dossier de sortie si nécessaire
     const dir = path.dirname(outputPath);
